@@ -1,16 +1,38 @@
 <script setup>
 
 import { AppState } from '@/AppState';
-import { computed } from 'vue';
+import { housesService } from '@/services/HousesService';
+import { logger } from '@/utils/Logger';
+import Pop from '@/utils/Pop';
+import { computed, onMounted } from 'vue';
 
 // const houses = computed(() => AppState.houses)
+
+onMounted(() => {
+  getHouses()
+})
+
+async function getHouses() {
+  try {
+    await housesService.getHouses()
+  } catch (error) {
+    Pop.error(error)
+    logger.error('[Get cars]', error)
+  }
+}
 
 </script>
 
 
 
 <template>
-  <h1>Houses Page</h1>
+  <div class="container">
+    <section class="row mb-3">
+      <div class="col-12">
+        <h1 class="text-center">Houses Page</h1>
+      </div>
+    </section>
+  </div>
 </template>
 
 
