@@ -6,7 +6,7 @@ import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
 import { computed, onMounted } from 'vue';
 
-// const houses = computed(() => AppState.houses)
+const houses = computed(() => AppState.houses)
 
 onMounted(() => {
   getHouses()
@@ -17,7 +17,7 @@ async function getHouses() {
     await housesService.getHouses()
   } catch (error) {
     Pop.error(error)
-    logger.error('[Get cars]', error)
+    logger.error('[Get houses]', error)
   }
 }
 
@@ -30,6 +30,12 @@ async function getHouses() {
     <section class="row mb-3">
       <div class="col-12">
         <h1 class="text-center">Houses Page</h1>
+      </div>
+    </section>
+
+    <section>
+      <div class="col-12">
+        {{ houses }}
       </div>
     </section>
   </div>
